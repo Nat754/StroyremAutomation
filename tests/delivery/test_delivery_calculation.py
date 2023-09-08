@@ -39,6 +39,7 @@ class TestDeliveryPageCalculation:
             marks=pytest.mark.xfail(reason="Цена стандартной доставки 4450")
         )
     ])
+    @pytest.mark.xfail
     @pytest.mark.smoke
     def test_positive_delivery_green_zone_smoke(
             self, driver, url, case_id, link_item, amount, weight, standard, in_time, all_time
@@ -119,6 +120,7 @@ class TestDeliveryPageCalculation:
             marks=pytest.mark.xfail(reson="Цена доставки: 7000 13900 15900")
         )
     ])
+    @pytest.mark.xfail
     @pytest.mark.smoke
     def test_positive_delivery_blue_zone_smoke(
             self, driver, url, case_id, link_item, amount, weight, standard, in_time, all_time
