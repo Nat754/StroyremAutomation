@@ -40,7 +40,7 @@ class TestDeliveryPageCalculation:
         )
     ])
     @pytest.mark.xfail
-    @pytest.mark.smoke
+    @pytest.mark.smoke_test
     def test_positive_delivery_green_zone_smoke(
             self, driver, url, case_id, link_item, amount, weight, standard, in_time, all_time
     ):
@@ -121,7 +121,7 @@ class TestDeliveryPageCalculation:
         )
     ])
     @pytest.mark.xfail
-    @pytest.mark.smoke
+    @pytest.mark.smoke_test
     def test_positive_delivery_blue_zone_smoke(
             self, driver, url, case_id, link_item, amount, weight, standard, in_time, all_time
     ):
