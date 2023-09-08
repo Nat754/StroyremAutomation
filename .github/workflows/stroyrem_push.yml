@@ -1,6 +1,8 @@
 name: Stroyrem_push
 
-on: push
+on:
+  workflow_dispatch:
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -11,32 +13,9 @@ jobs:
       - name: Pass credentials
         run: |
           sudo echo "${{ secrets.STROYREM_CREDENTIALS }}" > data/credentials.py
-      - name: docker-compose
+      - name: docker build
         run: |
-          docker-compose up --force-recreate --build
-
-      - name: Get Allure history
-        uses: actions/checkout@v2
-        if: always()
-        continue-on-error: true
-        with:
-          # ref -- branch (or tag in some case)
-          ref: gh-pages
-          # local path on a virtual machine
-          path: gh-pages
-
-      - name: Allure Report action
-        uses: simple-elf/allure-report-action@master
-        if: always()
-        with:
-          allure_results: allure_result
-          allure_history: allure-history
-          keep_reports: 20
-
-      - name: Commit Allure report
-        if: always()
-        uses: peaceiris/actions-gh-pages@v2
-        env:
-          PERSONAL_TOKEN: ${{ secrets.MY_TOKEN }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: allure-history
+          sudo docker build -t stroyrem .
+      - name: docker run
+        run: |
+          sudo docker run --rm stroyrem pytest -s -v tests/

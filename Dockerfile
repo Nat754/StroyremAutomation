@@ -72,5 +72,5 @@ COPY . .
 EXPOSE 9999
 
 # Run tests and make Allure report
-CMD ["sh", "-c", "pytest -s -v -n auto --alluredir=allure_result ; allure serve --port 9999 allure_result || true"]
+CMD ["sh", "-c", "pytest -s -v -n --alluredir=allure_result tests/ && allure serve --port 9999 allure_result"]
 
