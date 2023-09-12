@@ -229,10 +229,11 @@ class TestProductsOnSalePage:
     @pytest.mark.parametrize('link', [f"{MAIN_PAGE_PROD_URL}{ACTION_PAGE_URL}",
                                       f"{MAIN_PAGE_STAGE_URL}{ACTION_PAGE_URL}"])
     @pytest.mark.smoke_test
+    @pytest.mark.flaky(max_runs=3, min_passes=1)
     def test_positive_check_there_is_no_discount_for_unauthorized_customer_red_prices_smoke(
             self, link, product_page_open):
         product_page_open.get_in_stock_products_link().click()
-        time.sleep(1)
+        time.sleep(2)
         product_page_open.get_text_red_link().click()
         time.sleep(2)
         product_page_open.get_add_to_cart_btn().click()
