@@ -1,5 +1,6 @@
 import pytest
 import allure
+import time
 from selenium.common import TimeoutException
 from tests.catalog.catalog_constants import *
 from pages.catalog_page import CatalogPage
@@ -94,11 +95,40 @@ class TestCatalogPage:
         driver.get(link)
         page.get_sort_price_link().click()
         list_max_min = [int(item.text[:-2]) for item in page.get_list_price() if item.text != '']
-        # print('По убыванию:')
-        # print(list_max_min, sorted(list_max_min, reverse=True), sep='\n')
         assert list_max_min == sorted(list_max_min, reverse=True), "Список не отсортирован по убыванию"
         page.get_sort_price_link().click()
         list_min_max = [int(item.text[:-2]) for item in page.get_list_price() if item.text != '']
-        # print('По возрастанию:')
-        # print(list_min_max, sorted(list_min_max), sep='\n')
         assert list_min_max == sorted(list_min_max), "Список не отсортирован по возрастанию"
+
+    @allure.title("010_positive_display_item_status_in_stock_plaster_mixtures_smoke")
+    @pytest.mark.parametrize('link', [pytest.param(f"{MAIN_PAGE_PROD_URL}{SHTUKATURNYE_SMESI_PAGE_URL}",
+                                                   marks=pytest.mark.xfail(reason='Отображен товар, отсутствующий '
+                                                                                  'на складе')),
+                                      f"{MAIN_PAGE_STAGE_URL}{SHTUKATURNYE_SMESI_PAGE_URL}"])
+    @pytest.mark.smoke_test
+    def test_010_positive_display_item_status_in_stock_plaster_mixtures_smoke(self, driver, link):
+        page = CatalogPage(driver)
+        driver.get(link)
+        page.get_in_stock_products_link().click()
+        time.sleep(10)
+        catalog_products_on_the_store = [item.text for item in page.get_variants_btn() if item.text]
+        status = set(catalog_products_on_the_store)
+        assert status == {'В КОРЗИНУ'} or not status, 'Отображен товар, отсутствующий на складе'
+        assert len(page.get_products_ico()) == 60, 'Не все товары отображаются'
+
+    @allure.title("011_positive_display_item_status_latest__plaster_mixtures_smoke")
+    @pytest.mark.parametrize('link', [pytest.param(f"{MAIN_PAGE_PROD_URL}{SHTUKATURNYE_SMESI_PAGE_URL}",
+                                                   marks=pytest.mark.xfail(reason='Не все товары с меткой "Новинка"')),
+                                      f"{MAIN_PAGE_STAGE_URL}{SHTUKATURNYE_SMESI_PAGE_URL}"])
+    @pytest.mark.smoke_test
+    def test_011_positive_display_item_status_latest__plaster_mixtures_smoke(self, driver, link):
+        page = CatalogPage(driver)
+        driver.get(link)
+        page.get_label_new_products_link().click()
+        time.sleep(1)
+        cnt_new_products = len(page.get_products_ico())
+        cnt_label_new = len(page.get_label_new_products_ico())
+        assert cnt_new_products == cnt_label_new, 'Не все товары с меткой "Новинка"'
+        page.get_label_new_products_link().click()
+        time.sleep(1)
+        assert len(page.get_products_ico()) == 60, 'Не все товары отображаются'

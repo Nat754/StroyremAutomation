@@ -27,6 +27,11 @@ class CatalogPage(SeleniumBase):
         self._drywall_lists = (By.CSS_SELECTOR, "a.mcm-name[data-id='785']")
         self._sort_price_link = (By.XPATH, "//a[contains(text(), 'По цене')]")
         self._list_price = (By.CSS_SELECTOR, ".price-variant.active")
+        self._in_stock_products = (By.CSS_SELECTOR, "[for='in_stock_products'] span")
+        self._variants_btn = (By.CSS_SELECTOR, "form.variants.fn-cart")
+        self._label_new_products = (By.XPATH, "//label[@for='new_products']")
+        self._label_new_products_ico = (By.XPATH, "//div[@class='product-label new-label']")
+        self._products_ico = (By.XPATH, "//div[@class='pc-img']")
 
     @allure.step("Получение заголовка страницы")
     def get_page_title(self):
@@ -103,3 +108,25 @@ class CatalogPage(SeleniumBase):
     @allure.step("Проверяем что цена товаров из раздела 'Штукатурные смеси' видна на странице")
     def get_list_price(self):
         return self.elements_are_present(self._list_price)
+
+    @allure.step("Проверяем кликабельность кнопки 'На складе'")
+    def get_in_stock_products_link(self):
+        self.element_is_visible(self._in_stock_products)
+        return self.element_is_clickable(self._in_stock_products)
+
+    @allure.step("Проверяем отображение кнопок у товара 'В корзину', 'Запросить цену'")
+    def get_variants_btn(self):
+        return self.elements_are_present(self._variants_btn)
+
+    @allure.step("Проверяем кликабельность кнопки 'Новинка'")
+    def get_label_new_products_link(self):
+        self.element_is_visible(self._label_new_products)
+        return self.element_is_clickable(self._label_new_products)
+
+    @allure.step("Проверяем видимость метки 'Новинка'")
+    def get_label_new_products_ico(self):
+        return self.elements_are_present(self._label_new_products_ico)
+
+    @allure.step("Проверяем видимость товаров")
+    def get_products_ico(self):
+        return self.elements_are_present(self._products_ico)
