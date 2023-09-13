@@ -6,6 +6,7 @@ from constants import MAIN_PAGE_STAGE_URL, MAIN_PAGE_PROD_URL
 
 
 @allure.epic("Products On SalePage")
+@pytest.mark.flaky(max_runs=3, min_passes=1)
 class TestProductsOnSalePage:
 
     @allure.title("positive_check_discount_displayed_for_unauthorized_customer_for_amount_0-49rub_smoke")
@@ -229,7 +230,6 @@ class TestProductsOnSalePage:
     @pytest.mark.parametrize('link', [f"{MAIN_PAGE_PROD_URL}{ACTION_PAGE_URL}",
                                       f"{MAIN_PAGE_STAGE_URL}{ACTION_PAGE_URL}"])
     @pytest.mark.smoke_test
-    @pytest.mark.flaky(max_runs=3, min_passes=1)
     def test_positive_check_there_is_no_discount_for_unauthorized_customer_red_prices_smoke(
             self, link, product_page_open):
         product_page_open.get_in_stock_products_link().click()
