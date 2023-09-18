@@ -112,9 +112,9 @@ class TestCatalogPage:
         assert len(page.get_products_ico()) == 60, 'Не все товары отображаются'
 
     @allure.title("011_positive_display_item_status_latest__plaster_mixtures_smoke")
-    @pytest.mark.parametrize('link', [pytest.param(f"{MAIN_PAGE_PROD_URL}{SHTUKATURNYE_SMESI_PAGE_URL}",
-                                                   marks=pytest.mark.xfail(reason='Не все товары с меткой "Новинка"')),
+    @pytest.mark.parametrize('link', [f"{MAIN_PAGE_PROD_URL}{SHTUKATURNYE_SMESI_PAGE_URL}",
                                       f"{MAIN_PAGE_STAGE_URL}{SHTUKATURNYE_SMESI_PAGE_URL}"])
+    @pytest.mark.xfail(reason='Не все товары с меткой "Новинка"')
     @pytest.mark.smoke_test
     def test_011_positive_display_item_status_latest__plaster_mixtures_smoke(self, driver, link):
         page = CatalogPage(driver)
