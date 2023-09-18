@@ -9,7 +9,7 @@ from pages.main_page import MainPage
 from constants import MAIN_PAGE_STAGE_URL, MAIN_PAGE_TITLE, MAIN_PAGE_PROD_URL
 
 
-@pytest.mark.parametrize('url', [MAIN_PAGE_PROD_URL, MAIN_PAGE_STAGE_URL])
+@pytest.mark.parametrize('url', [MAIN_PAGE_PROD_URL, "https://dev:123456@test2.stroyrem-nn.ru/"])
 @allure.epic("Main Page")
 class TestMainPage:
 
