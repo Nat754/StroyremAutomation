@@ -41,7 +41,7 @@ class TestProductsOnSalePage:
         product_page_open.get_field_price_last().send_keys(14999)
         time.sleep(1)
         product_page_open.get_in_stock_products_link().click()
-        time.sleep(2)
+        time.sleep(3)
         product_page_open.get_add_to_cart_btn().click()
         price = (float(product_page_open.get_pc_price().text[:-2].replace(' ', '')))
         product_page_open.get_header_cart_link_active().click()
