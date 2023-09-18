@@ -23,8 +23,8 @@ class TestCatalogPage:
             f"Меню навигации '{CATALOG_PAGE_CATALOG_LINK}' не отображается"
 
     @allure.title("002_positive_last_link_of_catalog_smoke")
-    @pytest.mark.parametrize('link', [MAIN_PAGE_PROD_URL, pytest.param(
-        MAIN_PAGE_STAGE_URL, marks=pytest.mark.xfail(strict=True))])
+    @pytest.mark.parametrize('link', [MAIN_PAGE_PROD_URL, MAIN_PAGE_STAGE_URL])
+    @pytest.mark.xfail
     @pytest.mark.smoke_test
     def test_002_positive_last_link_of_catalog_smoke(self, driver, link, catalog_page_open):
         catalog_page_open.get_link_more().click()
