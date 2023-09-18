@@ -67,13 +67,9 @@ class TestCatalogPage:
         driver.get(link)
         page.get_sort_name_link_a_z().click()
         list_a_z = [item.text for item in page.get_list_shtukaturnye_smesi() if item.text != '']
-        # print('от А до Я:')
-        # print(list_a_z, sorted(list_a_z), sep='\n')
         assert list_a_z == sorted(list_a_z), "Список не отсортирован от А до Я"
         page.get_sort_name_link_z_a().click()
         list_z_a = [item.text for item in page.get_list_shtukaturnye_smesi() if item.text != '']
-        # print('от Я до А:')
-        # print(list_z_a, sorted(list_z_a, reverse=True), sep='\n')
         assert list_z_a == sorted(list_z_a, reverse=True), "Список не отсортирован от Я до А"
 
     @allure.title("007_positive_catalog_first_link_smoke")
@@ -101,10 +97,9 @@ class TestCatalogPage:
         assert list_min_max == sorted(list_min_max), "Список не отсортирован по возрастанию"
 
     @allure.title("010_positive_display_item_status_in_stock_plaster_mixtures_smoke")
-    @pytest.mark.parametrize('link', [pytest.param(f"{MAIN_PAGE_PROD_URL}{SHTUKATURNYE_SMESI_PAGE_URL}",
-                                                   marks=pytest.mark.xfail(reason='Отображен товар, отсутствующий '
-                                                                                  'на складе')),
+    @pytest.mark.parametrize('link', [f"{MAIN_PAGE_PROD_URL}{SHTUKATURNYE_SMESI_PAGE_URL}",
                                       f"{MAIN_PAGE_STAGE_URL}{SHTUKATURNYE_SMESI_PAGE_URL}"])
+    @pytest.mark.xfail(reason='Отображен товар, отсутствующий на складе')
     @pytest.mark.smoke_test
     def test_010_positive_display_item_status_in_stock_plaster_mixtures_smoke(self, driver, link):
         page = CatalogPage(driver)
