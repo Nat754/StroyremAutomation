@@ -3,7 +3,7 @@
 ### Запуск тестов в Docker
 - ```docker-compose up --build```
 
-Отчет Allure
+# Отчет Allure
 Также отчет Allure можно скопировать из контейнера и сформировать на хосте: 
 - `````$CONTAINER_ID = (docker ps -a -q | Select-Object -First 1)`````
 - ```docker cp ${CONTAINER_ID}:/app/allure_result .```
