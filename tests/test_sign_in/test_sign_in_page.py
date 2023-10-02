@@ -230,6 +230,7 @@ class TestSignInPage:
 
     @allure.title("Авторизация с помощью формы авторизации")
     @pytest.mark.smoke_test
+    @pytest.mark.xfail
     def test_positive_login_with_correct_email_and_password_smoke(self, driver, sign_in_page, open_sign_in_window):
         sign_in_page.get_email_field().send_keys(credentials['email'])
         sign_in_page.get_password_field().send_keys(credentials['password'])

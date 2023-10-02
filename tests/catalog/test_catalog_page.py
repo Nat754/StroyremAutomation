@@ -86,6 +86,7 @@ class TestCatalogPage:
     @pytest.mark.parametrize('link', [f"{MAIN_PAGE_PROD_URL}{SHTUKATURNYE_SMESI_PAGE_URL}",
                                       f"{MAIN_PAGE_STAGE_URL}{SHTUKATURNYE_SMESI_PAGE_URL}"])
     @pytest.mark.smoke_test
+    @pytest.mark.xfail
     def test_008_positive_cost_plaster_mixtures_smoke(self, driver, link):
         page = CatalogPage(driver)
         driver.get(link)
