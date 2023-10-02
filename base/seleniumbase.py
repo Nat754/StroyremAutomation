@@ -7,7 +7,7 @@ from selenium.common import TimeoutException, StaleElementReferenceException
 class SeleniumBase:
     def __init__(self, driver):
         self.driver = driver
-        self.__wait = WebDriverWait(driver, 15, 0.3)
+        self.__wait = WebDriverWait(driver, 15, 1.5)
 
     def find_element(self, locator):
         """
@@ -29,8 +29,6 @@ class SeleniumBase:
         Видимость означает, что элемент не только отображается,
         но также имеет высоту и ширину больше 0.
         Локатор - используется для поиска элемента. Возвращает WebElement.
-        Timeout - время в течение которого он будет ожидать. По умолчанию стоит 5 секунд,
-        при необходимости можно будет изменить.
         """
         self.go_to_element(self.element_is_present(locator))
         return self.__wait.until(EC.visibility_of_element_located(locator))
@@ -41,8 +39,6 @@ class SeleniumBase:
         Видимость означает, что элементы не только отображаются,
         но также имеет высоту и ширину больше 0.
         Локатор - используется для поиска элементов. Возвращает WebElements.
-        Timeout - время в течение которого он будет ожидать. По умолчанию стоит 5 секунд,
-        при необходимости можно будет изменить.
         """
         return self.__wait.until(EC.visibility_of_all_elements_located(locator))
 
@@ -51,8 +47,6 @@ class SeleniumBase:
         Ожидает проверку, что элемент присутствует в DOM-дереве, но не обязательно,
         что виден и отображается на странице.
         Локатор - используется для поиска элемента. Возвращает WebElement.
-        Timeout - время в течение которого он будет ожидать. По умолчанию стоит 5 секунд,
-        при необходимости можно будет изменить.
         """
         return self.__wait.until(EC.presence_of_element_located(locator))
 
@@ -61,8 +55,6 @@ class SeleniumBase:
         Ожидает проверку, что элементы присутствуют в DOM-дереве, но не обязательно,
         что видны и отображаются на странице.
         Локатор - используется для поиска элемента. Возвращает WebElement.
-        Timeout - время в течение которого он будет ожидать. По умолчанию стоит 5 секунд,
-        при необходимости можно будет изменить.
         """
         return self.__wait.until(EC.presence_of_all_elements_located(locator))
 
@@ -70,8 +62,6 @@ class SeleniumBase:
         """
         Ожидает проверку, является ли элемент невидимым или нет. Элемент присутствует в DOM-дереве.
         Локатор - используется для поиска элемента. Возвращает WebElement.
-        Timeout - время в течение которого он будет ожидать. По умолчанию стоит 5 секунд,
-        при необходимости можно будет изменить.
         """
         return self.__wait.until(EC.invisibility_of_element_located(locator))
 
@@ -80,8 +70,6 @@ class SeleniumBase:
         Ожидает проверку, что элемент виден, отображается на странице,
         а также элемент включен. Элемент присутствует в DOM-дереве.
         Локатор - используется для поиска элемента.
-        Timeout - время в течение которого он будет ожидать. По умолчанию стоит 5 секунд,
-        при необходимости можно будет изменить.
         """
         return self.__wait.until(EC.element_to_be_clickable(locator))
 

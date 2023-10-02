@@ -6,18 +6,12 @@ from pages.location_page import LocationPage
 from pages.delivery_page import DeliveryPage
 from pages.lifting_page import LiftingPage
 from pages.main_page import MainPage
-from constants import MAIN_PAGE_STAGE_URL, MAIN_PAGE_TITLE, MAIN_PAGE_PROD_URL
+from constants import MAIN_PAGE_STAGE_LOGGED_IN_URL, MAIN_PAGE_TITLE, MAIN_PAGE_PROD_URL
 
 
-@pytest.mark.parametrize('url', [MAIN_PAGE_PROD_URL, "https://dev:123456@test2.stroyrem-nn.ru/"])
+@pytest.mark.parametrize('url', [MAIN_PAGE_PROD_URL, MAIN_PAGE_STAGE_LOGGED_IN_URL])
 @allure.epic("Main Page")
 class TestMainPage:
-
-    # @allure.title("TC 001 - проверка логотипа Stroyrem в хедере на главной странице")
-    # @pytest.mark.smoke_test
-    # def test_001_visibility_of_header_logo(self, driver, open_and_load_main_page):
-    #     main_page = MainPage(driver)
-    #     main_page.check_that_image_is_present_and_visible_on_the_page(BasePageLocators.HEADER_LOGO)
 
     @allure.title("TC 002 - проверка title на главной странице")
     @pytest.mark.regression_test

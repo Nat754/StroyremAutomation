@@ -2,6 +2,7 @@
 MAIN_PAGE_PROD_URL = "https://stroyrem-nn.ru/"
 # Главная страница на стейдже
 MAIN_PAGE_STAGE_URL = "https://test2.stroyrem-nn.ru/"
+MAIN_PAGE_STAGE_LOGGED_IN_URL = "https://dev:123456@test2.stroyrem-nn.ru/"
 # Главная страница песочницы
 MAIN_PAGE_SANDBOX_TEST_URL = "https://sandboxtest.stroyrem-nn.ru/"
 MAIN_PAGE_TITLE = "Стройматериалы"
