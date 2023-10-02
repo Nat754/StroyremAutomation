@@ -25,7 +25,7 @@ jobs:
       - name: Get Allure history
         uses: actions/checkout@v2
         if: always()
-        continue-on-error: true
+        continue-on-error: false
         with:
           # ref -- branch (or tag in some case)
           ref: gh-pages
