@@ -14,5 +14,7 @@
 - ```docker exec -it ИМЯ_ИЛИ_ID_КОНТЕЙНЕРА bash ```
 - ```exit```
 
+[![StroyremAutomation](https://github.com/Nat754/StroyremAutomation/actions/workflows/stroyrem_ci.yml/badge.svg?branch=main)](https://github.com/RedRoverSchool/Nat754/StroyremAutomation/actions/workflows/stroyrem_ci.yml)
+
 [![Allure-report](https://img.shields.io/badge/Allure%20Report-deployed-green)](https://nat754.github.io/StroyremAutomation/)
 
