@@ -34,7 +34,7 @@ class MainPage(SeleniumBase):
         # футер "Помощь покупателю"
         self._call_back_link = (By.XPATH, "(//a[@href='#backcall-popup'])[2]")
         self._call_back_popup_title = (By.XPATH, "(//div[@class='popup-h'])[1]")
-        self._location = (By.XPATH, "(//a[@href='/contact'])[3]")
+        self._location = (By.XPATH, "(//a[@href='/contact'])[2]")
         self._attach_application = (By.XPATH, "(//a[@href='#attach-application'])[2]")
         # футер "Интернет магазин"
         self._building_advices_link = (By.XPATH, "(//a[@href='/articles'])[3]")
@@ -43,7 +43,7 @@ class MainPage(SeleniumBase):
         self._product_catalog_header = (By.XPATH, "(//div[@class='mcm-h'])[1]")
         self._new_products_link = (By.XPATH, "(//a[@href='/catalog/new'])[3]")
         self._new_products_title = (By.XPATH, "//h1[contains(text(),'Новинки')]")
-        self._price_link = (By.XPATH, "//a[@href='/price']")
+        self._price_link = (By.CSS_SELECTOR, ".footer-col a[href='/pricelist']")
         self._reviews_link = (By.XPATH, "(//a[contains(text(), 'Отзывы')])[3]")
         self._header = (By.XPATH, "//h1")
         self._shares_link = (By.XPATH, "(//a[contains(text(), 'Акции')])[2]")
@@ -82,11 +82,12 @@ class MainPage(SeleniumBase):
     @allure.step("Проверка селекторов на странице статьи")
     def check_selectors_article_page(self):
         """Проверяет доступность селекторов на странице статьи и возвращает их статус"""
-        selectors_status = {}
-        selectors_status['comment_button'] = self.driver.find_element(*self._comment_button).is_enabled()
-        selectors_status['input_name'] = self.driver.find_element(*self._input_name).is_enabled()
-        selectors_status['input_comment'] = self.driver.find_element(*self._input_comment).is_enabled()
-        selectors_status['send_button'] = self.driver.find_element(*self._send_button).is_enabled()
+        selectors_status = {
+            'comment_button': self.driver.find_element(*self._comment_button).is_enabled(),
+            'input_name': self.driver.find_element(*self._input_name).is_enabled(),
+            'input_comment': self.driver.find_element(*self._input_comment).is_enabled(),
+            'send_button': self.driver.find_element(*self._send_button).is_enabled()
+        }
         return selectors_status
 
     @allure.step("Проверка наличия статей на странице с советами (т.к. видео есть не на всех страницах)")
